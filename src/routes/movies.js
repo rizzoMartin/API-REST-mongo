@@ -5,9 +5,28 @@ const _ = require('underscore');
 const { v4: uuidv4 } = require('uuid');
 
 const data = require('../movies.json');
+const mongo = require('../db/conn')
+// router.get('/', (req, res) => {
+//     res.json(data);
+// });
 
-router.get('/', (req, res) => {
-    res.json(data);
+router.get('/', async function (req, res) {
+    mongo.connectToServer((err) => {
+        if (err){
+            throw err
+        }
+        
+        const db = mongo.getDb();
+
+        db.collection('movies').find().toArray((err, result) => {
+            if (err) {
+                res.status(400).send("Error fetching listings!");
+            }
+            else {
+                res.json(result);
+            }
+        });
+    });
 });
 
 router.post('/', (req, res) => {
