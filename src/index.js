@@ -2,6 +2,9 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 
+// to allow to connect to the server from the same machine
+const cors = require('cors');
+
 // This way our whole app is connected
 // with mongo at start and
 // I can use it just using
@@ -16,6 +19,7 @@ mongo.connectToServer((err) => {
     // Configurations 
     app.set('port', process.env.PORT || 3000);
     app.set('json spaces', 2);
+    app.use(cors());
 
     // Middleware
     app.use(morgan('dev'));
