@@ -23,8 +23,8 @@ mongo.connectToServer((err) => {
     app.use(express.json());
 
     // Routing
-    app.use(require('./routes/index'));
-    app.use('/api/movies', require('./routes/movies'));
+    app.use(require('./routes/movies'));
+    // app.use('/api/movies', require('./routes/movies'));
 
     // Server initiation
     app.listen(app.get('port'), ()=>{
