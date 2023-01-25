@@ -1,10 +1,6 @@
 const { Router } = require('express');
 const router = Router();
 
-const _ = require('underscore');
-const { v4: uuidv4 } = require('uuid');
-
-const data = require('../movies.json');
 const mongo = require('../db/conn')
 const { ObjectId } = require('mongodb')
 
